@@ -3,7 +3,7 @@ var grove = require('jsupm_grove');
 var Pump = function() {
   this.switch = new grove.GroveRelay(5);
 
-  this.maxRunTime = 5000;
+  this.maxRunTime = 15000;
   this.runTimeoutId = 0;
   this.state = {
     on: false,
