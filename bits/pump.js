@@ -17,6 +17,7 @@ Pump.prototype.on = function() {
     console.log("Pump on");
     this.state.on = true;
     this.state.startTime = Date.now();
+    this.state.stopTime = null;
     this.switch.on();
     this.runTimeoutId = setTimeout(function() {
       that.off();
@@ -32,6 +33,16 @@ Pump.prototype.off = function() {
     clearInterval(this.runTimeoutId);
     this.switch.off();
   }
+};
+
+Pump.prototype.awsIotState = function() {
+  return {
+    "state": {
+      "desired": {
+        "pump": this.state
+      }
+    }
+  };
 };
 
 module.exports = new Pump();
