@@ -38,6 +38,11 @@ thingShadows.on('status', function(thingName, stat, clientToken, stateObject) {
 
 thingShadows.on('delta', function(thingName, stateObject) {
   console.log("Received delta on " + thingName + ": " + JSON.stringify(stateObject));
+  if (stateObject.state.pump.on) {
+    Pump.on();
+  } else {
+    Pump.off();
+  }
 });
 
 thingShadows.on('timeout', function(thingName, clientToken) {
