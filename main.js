@@ -27,6 +27,7 @@ var clientTokenUpdate;
 thingShadows.on('connect', function(){
   thingShadows.register('samwise');
   setTimeout(function(){
+    console.log("Connected to AWS IoT");
     clientTokenUpdate = thingShadows.update('samwise', Pump.awsIotState());
   }, 5000);
 });
@@ -35,4 +36,11 @@ thingShadows.on('status', function(thingName, stat, clientToken, stateObject) {
   console.log("Received " + stat + " on " + thingName + ": " + JSON.stringify(stateObject));
 });
 
-// TODO listen to timeout
+thingShadows.on('delta', function(thingName, stateObject) {
+  console.log("Received delta on " + thingName + ": " + JSON.stringify(stateObject));
+});
+
+thingShadows.on('timeout', function(thingName, clientToken) {
+  console.log("Received timeout on " + thingName + " with token: " + clientToken);
+});
+
