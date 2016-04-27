@@ -58,7 +58,7 @@ function sendMetrics(args) {
         for (prop in payload) {
            publish(payload, prop);
         }
-    }, args.delay);
+    }, sendInterval);
 
     function publish(payload, type) {
         var data = {
