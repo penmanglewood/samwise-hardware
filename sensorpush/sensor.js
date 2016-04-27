@@ -3,8 +3,8 @@
  * @author Wolfram Huesken <wolfram.huesken@zalora.com>
  */
 
-const deviceModule = require('..').device;
-const cmdLineProcess = require('../examples/lib/cmdline');
+const deviceModule = require('../..').device;
+const cmdLineProcess = require('../../examples/lib/cmdline');
 const fs = require('fs');
 
 const tempHumiLib = require('jsupm_th02');
@@ -40,7 +40,7 @@ function sendMetrics(args) {
     const queue = 'sensors';
     const tempSource = '/sys/class/thermal/thermal_zone0/temp';
     const networkSource = '/proc/net/dev';
-    const sendInterval = 2000;
+    const sendInterval = 60000;
 
     var date, timeout;
 
