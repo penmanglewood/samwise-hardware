@@ -11,6 +11,7 @@ var Pump = require('./bits/pump.js');
 
 // Unique client id per aws account
 var clientId = "rubio-edison";
+var pumpThingName = "samwise-pump";
 
 // Setup
 //
@@ -25,10 +26,10 @@ var thingShadows = awsIot.thingShadow({
 var clientTokenUpdate;
 
 thingShadows.on('connect', function(){
-  thingShadows.register('samwise');
+  thingShadows.register(pumpThingName);
   setTimeout(function(){
     console.log("Connected to AWS IoT");
-    clientTokenUpdate = thingShadows.update('samwise', Pump.awsIotState());
+    clientTokenUpdate = thingShadows.update(pumpThingName, Pump.awsIotState());
   }, 5000);
 });
 
