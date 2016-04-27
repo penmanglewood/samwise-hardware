@@ -13,8 +13,8 @@ var Pump = require('./bits/pump.js');
 //
 var thingShadows = awsIot.thingShadow({
   keyPath: process.env.AWS_IOT_KEYPATH,
-  certPath: process.env.AWS_IOT_KEYPATH,
-  caPath: process.env.AWS_IOT_KEYPATH,
+  certPath: process.env.AWS_IOT_CERTPATH,
+  caPath: process.env.AWS_IOT_CAPATH,
   clientId: process.env.AWS_IOT_CLIENTID,
   region: process.env.AWS_IOT_REGION
 });
