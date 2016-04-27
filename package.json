@@ -1,0 +1,19 @@
+{
+  "name": "samwise-hardware",
+  "version": "1.0.0",
+  "description": "Water your plants while on an epic adventure",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/samwise-hardware"
+  },
+  "author": "The Fellowship",
+  "license": "ISC",
+  "dependencies": {
+    "aws-iot-device-sdk": "^1.0.12",
+    "jsupm_grove": "^0.4.1"
+  }
+}
