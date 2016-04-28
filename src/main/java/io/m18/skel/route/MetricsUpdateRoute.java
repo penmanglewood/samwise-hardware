@@ -1,13 +1,14 @@
 package io.m18.skel.route;
 
-import lombok.*;
-import io.m18.skel.processor.DemoProcessor;
+import io.m18.skel.processor.WsProcessor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 /**
  * Workflow:
@@ -22,30 +23,28 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Component
 @Profile({"dev"})
-@ConfigurationProperties(prefix="routes.DemoRoute")
-public class DemoRoute extends RouteBuilder {
+@ConfigurationProperties(prefix="routes.MetricsUpdate")
+public class MetricsUpdateRoute extends RouteBuilder {
 
     @Getter @Setter
     private String wireTap;
 
     @Getter @Setter
-    private String demoFolder;
+    private String webserver;
 
     @Getter @Setter
-    private String demoLogger;
+    private String websocket;
 
     @Autowired
-    private DemoProcessor demoProcessor;
+    private WsProcessor wsProcessor;
 
     @Override
     public void configure() {
-        from(demoFolder).routeId(getClass().getSimpleName())
+        from(webserver).routeId(getClass().getSimpleName())
             .convertBodyTo(String.class)
             .wireTap(wireTap)
-            .process(demoProcessor).id("MyProcessor")
-            .marshal().json(JsonLibrary.Gson)
             .convertBodyTo(String.class)
-            .to(demoLogger);
+            .to(websocket);
     }
 
 }
