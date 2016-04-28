@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+	<title>Samwise Gartner</title>
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="lib/framework7.ios.css">
+	<link rel="stylesheet" href="lib/framework7.ios.colors.css">
+	<link rel="stylesheet" href="css/hn7.css">
+	<link rel="stylesheet" href="css/lineGraph.css">
+	<link rel="stylesheet" href="css/heatmap.css">
+	<script src="js/lineGraph.js"></script>
+	<script src="js/heatmap.js"></script>
+	<script src="js/heatmap2.js"></script>
+	<script src="js/pm25.js"></script>
+	<script src="js/data.js"></script>
+	
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.5.min.js"></script>
+</head>
+
+<body>
+	<!-- Status bar overlay for fullscreen mode -->
+	<div class="statusbar-overlay"></div>
+
+    <!-- Right Panel for user information -->
+    <div class="panel panel-right panel-reveal"></div>
+    
+	<!-- views -->
+	<div class="views">
+		<!-- Put panels-overlay and left-panel with view inside of views-->
+		<!-- Panels overlay-->
+		<div class="panel-overlay"></div>
+		<!-- Left panel with reveal effect-->
+		<div class="panel panel-left panel-cover">
+			<!-- Left view-->
+			<div class="view view-left navbar-through">
+				<div class="navbar theme-white">
+					<div class="navbar-inner">
+						<div class="left">
+						</div>
+						<div class="center sliding">
+							<span class="mobile-title">Samwise Gartner</span>
+							<span class="tablet-title">Samwise Gartner</span>
+						</div>
+						<div class="right sliding">
+      			<!-- User link for small screen -->
+      			<a href="#" data-panel="right" class="open-panel link icon-only"> <img src="img/avatar.svg" width="28px" /></a>
+    				</div>
+					</div>
+				</div>
+				<div class="pages">
+					<div class="page" data-page="index">
+						<!-- Search bar -->
+						<div class="page-content pull-to-refresh-content">
+							<div class="pull-to-refresh-layer">
+								<div class="preloader"></div>
+							</div>
+							<div id="page-header"></div>
+							<div id="data-header"><b>Today's Data</b></div>
+							<div class="list-block media-list stories-list list-block-search searchbar-found"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- main view -->
+		<div class="view view-main navbar-through">
+			<div class="navbar theme-white">
+				<div class="navbar-inner">
+					<div class="left">
+						<a href="#" class="link open-panel icon-only">
+							<i class="icon icon-bars"></i>
+						</a>
+					</div>
+					<div class="center">Samwise Gartner</div>
+				</div>
+			</div>
+			<div class="pages">
+				<div class="page" data-page="main">
+					<div class="choose-story">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- template7 templates -->
+	<script type="text/template7" id="emptyCurrentValuesTemplate">
+				<div class="page-header">
+						<div class="page-header-inner">
+								<p>
+									<b>Current Values</b>
+								</p>
+								<p>
+								Loading...
+								</p>
+						</div>
+					</a>
+				</div>
+	</script>
+	<script type="text/template7" id="currentValuesTemplate">
+				<div class="page-header">
+						<div class="page-header-inner">
+								<p>
+									<b>Current Values</b>
+								</p>
+								<p>
+									Humidity = {{humidity}}<br/>
+									Soil Moisture = {{moisture}}<br/>
+									Light = {{light}}<br/>
+									Ultra Violet = {{ultraviolet}}<br/>
+									Temperature = {{temperature}}<br/>
+								</p>
+						</div>
+					</a>
+				</div>
+	</script>
+	<script type="text/template7" id="storiesTemplate">
+		<ul>
+		{{#each this}}
+			<li class="swipeout">
+				<div class="swipeout-content">
+					<a href="item.html?id={{id}}&type={{type}}" data-context-name="stories.{{@index}}" class="item-content item-link">
+						<div class="item-inner">
+								<div class="item-title">{{title}}</div>
+						</div>
+					</a>
+				</div>
+			</li>
+		{{/each}}
+		</ul>
+	</script>
+    <script type="text/template7" id="userTemplate">
+      <div class="content-block user">
+		  <img class="user-avatar" src="img/avatar.svg" width="128px"/>
+          <h1 class="user-name">Do Stuff here</h1>
+          <div>
+          		set the moisture level threshold for dispensing for water<br/><br/>
+          		<button id="threshold-add" class="myButton">+</button>
+          		<span id="threshold-value">100</span>
+          		<button id="threshold-minus" class="myButton">-</button>
+          		<br/><br/>
+          		<button id="dispense-water" class="myButton">Dispense water now</button><br/><br/>
+          </div>
+      </div>
+	</script>
+
+	<!-- libraries -->
+	<script src="lib/moment.js"></script>
+	<script>
+		window.moment = (typeof moment !== 'undefined') ? moment : require('moment');
+	</script>
+	<script src="lib/framework7.js"></script>
+	<script src="js/hn7.js"></script>
+</body>
+
+</html>

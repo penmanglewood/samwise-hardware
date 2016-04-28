@@ -1,0 +1,27 @@
+var moistureData = [
+ {
+  date:"2012-07-20",
+  bucket:800,
+  count:119
+ },
+ {
+  date:"2012-07-20",
+  bucket:900,
+  count:123
+ },
+ {
+  date:"2012-07-20",
+  bucket:1000,
+  count:173
+ },
+ {
+  date:"2012-07-20",
+  bucket:1100,
+  count:226
+ },
+ {
+  date:"2012-07-20",
+  bucket:1200,
+  count:284
+ }
+];
